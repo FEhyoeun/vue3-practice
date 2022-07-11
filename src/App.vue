@@ -1,10 +1,11 @@
 <script setup>
+import TheHeader from '@/layouts/TheHeader.vue';
+import TheView from '@/layouts/TheView.vue';
 </script>
 
 <template>
-  <div></div>
+  <TheHeader />
+  <TheView />
 </template>
 
-<style>
-
-</style>
+<style></style>
