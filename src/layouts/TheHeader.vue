@@ -33,7 +33,7 @@
             </li>
           </ul>
           <div class="d-flex">
-            <button class="btn btn-outline-success" type="button">
+            <button class="btn btn-outline-light" type="button" @click="goPage">
               글쓰기
             </button>
           </div>
@@ -43,9 +43,15 @@
   </header>
 </template>
 
-<script>
-export default {
-  name: 'TheHeader',
+<script setup>
+import { useRouter } from 'vue-router';
+
+const router = useRouter();
+const goPage = () => {
+  // router.push('/posts/create');
+  router.push({
+    name: 'PostCreate',
+  });
 };
 </script>
 

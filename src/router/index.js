@@ -20,18 +20,22 @@ const routes = [
   },
   {
     path: '/posts',
+    name: 'PostList',
     component: PostListView,
   },
   {
     path: '/posts/create',
+    name: 'PostCreate',
     component: PostCreateView,
   },
   {
     path: '/posts/:id',
+    name: 'PostDetail',
     component: PostDetailView,
   },
   {
     path: '/posts/:id/edit',
+    name: 'PostEdit',
     component: PostEditView,
   },
 ];
