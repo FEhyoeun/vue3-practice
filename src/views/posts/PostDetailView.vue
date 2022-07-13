@@ -1,8 +1,8 @@
 <template>
   <div>
-    <h2>제목</h2>
-    <p>내용</p>
-    <p class="text-muted">2020-01-01</p>
+    <h2>{{ form.title }}</h2>
+    <p>{{ form.content }}</p>
+    <p class="text-muted">{{ form.createdAt }}</p>
     <hr class="my-4" />
     <div class="row g-2">
       <div class="col-auto">
@@ -28,11 +28,34 @@
 </template>
 
 <script setup>
-import { useRouter, useRoute } from 'vue-router';
-const route = useRoute();
-const router = useRouter();
-const id = route.params.id;
+import { useRouter } from 'vue-router';
+import { getPostById } from '@/api/posts';
+import { ref } from 'vue';
 
+const props = defineProps({
+  id: Number,
+});
+
+// const route = useRoute();
+const router = useRouter();
+// const id = route.params.id;
+const form = ref({});
+
+/**
+ * ref
+ * 장) 객체 할당 가능
+ * 단) .value 반복 o
+ *
+ * reactive
+ * 장) .vlaue 반복 x
+ * 단) 객체 할당 불가능
+ */
+
+const fetchPost = () => {
+  const data = getPostById(props.id);
+  form.value = { ...data }; // 이렇게 객체를 복사하지 않으면 주소값을 참조하고 있기 때문에 원본 데이터가 변경되었을 때 얘도 바뀌게 됨
+};
+fetchPost();
 const goListPage = () => {
   router.push({
     name: 'PostList',
@@ -41,7 +64,7 @@ const goListPage = () => {
 const goListEdit = () => {
   router.push({
     name: 'PostEdit',
-    params: { id },
+    params: { id: props.id },
   });
 };
 </script>
