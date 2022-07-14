@@ -23,14 +23,33 @@
 <script setup>
 import PostItem from '@/components/posts/PostItem.vue';
 import PostDetailView from '@/views/posts/PostDetailView.vue';
-import AppCard from '@/components/AppCard';
+import AppCard from '@/components/AppCard.vue';
 import { getPosts } from '@/api/posts';
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
 
 const posts = ref([]);
-const fetchPosts = () => {
-  posts.value = getPosts();
+const fetchPosts = async () => {
+  try {
+    const { data } = await getPosts();
+    posts.value = data;
+    // 위 두 줄을 대체해서
+    // ({ data: posts.value } = await getPosts())
+    // 이렇게도 사용할 수 있음
+  } catch (error) {
+    console.error(error);
+  }
+
+  // console.dir(response); // 객체는 console.dir로 찍는 게 편함
+
+  // .then(value => {
+  //   posts.value = value;
+  // })
+  // .catch(err => {
+  //   console.err(err);
+  // });
+
+  // posts.value = getPosts();
 };
 
 const router = useRouter();

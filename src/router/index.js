@@ -79,7 +79,8 @@ const routes = [
 
 // router는 페이지를 이동할 수 있게 해주는 객체
 const router = createRouter({
-  history: createWebHistory('/'),
+  history: createWebHistory('/'), // base에 문자열을 입력하면 해당 문자열이 정말 base url로 붙음
+  // history: createWebHashHistory() // 이렇게 하면 경로에 #
   routes,
 });
 
